@@ -26,7 +26,23 @@ class User(peewee.Model):
 
 
 def run():
-    user = User.get(User.id ==1)
+    # Cantidad de usuarios
+    count = User.select().count()
+    print(count)
+    
+    #Limitar los registros mostrados
+    users = User.select().where(User.id > 1).limit(2)
+    for user in users:
+        print(user)
+
+    #Ordenar
+    print("###Ordenar###")
+    users = User.select().where(User.id > 1).order_by(User.username.desc())
+    for user in users:
+        print(user)
+
+    print("###Retornando el  ultimo registro##")
+    user = User.select().order_by(User.id.desc()).limit(1).get()
     print(user)
 
 

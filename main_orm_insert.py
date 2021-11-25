@@ -49,7 +49,7 @@ def run():
 
     #5 Utilizando insert()
 
-    query = User.insert(username='jonjon2', password='password2', email='jona2@outlok.com')
+    query = User.insert(username='archie', password='cybertron', email='jona2@outlok.com')
     query.execute()
 
 
