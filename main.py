@@ -26,10 +26,27 @@ class User(peewee.Model):
 
 
 def run():
-    user = User.get(User.id ==1)
+    try:
+        user = User.get(User.id ==10)
+        print(user)
+    except User.DoesNotExist as error:
+        print("Usuario no existe")
+    
+
+    ## Validando usando Select
+    user = User.select().where(User.id == 10).first()
     print(user)
+    if user:
+        print("El usuario existe")
+    else:
+        print("No existe")
 
-
+    #Utilizando metodo exists
+    flag = User.select().where(User.id == 10).exists()
+    if flag:
+           print("El usuario existe")
+    else:
+        print("No existe")
 
 if __name__ == '__main__':
     run()
