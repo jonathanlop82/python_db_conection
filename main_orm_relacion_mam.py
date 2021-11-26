@@ -77,11 +77,17 @@ def create_schema():
     insert_categories_products()
 
 def run():
-    
+    categories = Category.select()
+    for category in categories:
+        print(">>" + str(category))
+
+        for product in category.products: #<-- nombre de la relacion products
+            print(product)
+
+    print("###"*10)
     jamon = Product.get(Product.name == 'Jamon')
-
-    jamon.delete_instance(recursive=True)
-
+    for category in jamon.categories:
+        print(category.category.name)
 
 if __name__ == '__main__':
     run()
