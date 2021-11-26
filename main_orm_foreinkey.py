@@ -49,5 +49,7 @@ def run():
 
     store = Store.create(name='Tienda Panama', address='Panama', user=user)
 
+    
+
 if __name__ == '__main__':
     run()
