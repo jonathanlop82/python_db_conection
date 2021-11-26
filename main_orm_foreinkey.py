@@ -25,8 +25,7 @@ class User(peewee.Model):
         return self.username
 
 class Store(peewee.Model):
-    #user = peewee.ForeignKeyField(User, primary_key=True) #Relacion 1 a 1
-    user = peewee.ForeignKeyField(User, related_name='stores') #Relacion 1 a muchos, 1 usuario tiene muchas tiendas
+    user = peewee.ForeignKeyField(User, primary_key=True)
     name = peewee.CharField(max_length=50)
     address = peewee.TextField()
     active = peewee.BooleanField(default=True)
@@ -36,29 +35,19 @@ class Store(peewee.Model):
         database = database
         db_table = 'stores'
 
-    def __str__(self):
-        return self.name
-def create_tables():
-    if User.table_exists():
-       User.drop_table()
-    User.create_table()
-
-    if Store.table_exists():
-        Store.drop_table()
-    Store.create_table()
-
-
 def run():
-    user = User.get(User.id==1)
-    print(user)
+    # if Store.table_exists():
+    #     Store.drop_table()
+    # Store.create_table()
 
-    for store in user.stores:
-        print(store)
+    # if User.table_exists():
+    #     User.drop_table()
+    # User.create_table()
 
-    #Consulta Store 1
-    store1 = Store.get(Store.id ==1)
-    print(store1.user)
 
+    user = User.create(username='jonathan', password='jonjon123', email='jon@jon.com')
+
+    store = Store.create(name='Tienda Panama', address='Panama', user=user)
 
 if __name__ == '__main__':
     run()
